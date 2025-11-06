@@ -1,16 +1,11 @@
 {
-  "name": "SCTVVAS Gantt Chart",
-  "organization": "SCTVVAS",
-  "description": "Custom Gantt chart visualization for Looker Studio (developed by SCTVVAS).",
-  "logoUrl": "https://github.com/sctvvas-svr.png",
-  "supportUrl": "https://github.com/sctvvas-svr/gantt",
+  "name": "Custom Gantt Chart",
+  "description": "Gantt chart with progress gradient and current date marker",
   "resources": {
     "js": ["index.js"],
     "css": []
   },
-  "data": {
-    "id": "sctvvas_gantt_v1",
-    "fields": [
+  "fields": [
     {"id": "group", "name": "Group of tasks", "type": "DIMENSION"},
     {"id": "task", "name": "Task", "type": "DIMENSION"},
     {"id": "start", "name": "Start Date", "type": "DATE"},
@@ -18,22 +13,4 @@
     {"id": "progress", "name": "Progress", "type": "NUMBER"},
     {"id": "control", "name": "Control Field", "type": "DIMENSION"}
   ]
-  },
-  "options": {
-    "barColor": {
-      "type": "COLOR",
-      "label": "Bar Color",
-      "default": "#4285F4"
-    },
-    "barHeight": {
-      "type": "NUMBER",
-      "label": "Bar Height (px)",
-      "default": 20
-    },
-    "showLabels": {
-      "type": "BOOLEAN",
-      "label": "Show task labels",
-      "default": true
-    }
-  }
 }
