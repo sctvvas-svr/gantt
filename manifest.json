@@ -2,15 +2,22 @@
   "name": "Custom Gantt Chart",
   "description": "Gantt chart with progress gradient and current date marker",
   "resources": {
-    "js": ["index.js"],
-    "css": []
+    "js": ["index.js"]
   },
-  "fields": [
-    {"id": "group", "name": "Group of tasks", "type": "DIMENSION"},
-    {"id": "task", "name": "Task", "type": "DIMENSION"},
-    {"id": "start", "name": "Start Date", "type": "DATE"},
-    {"id": "end", "name": "End Date", "type": "DATE"},
-    {"id": "progress", "name": "Progress", "type": "NUMBER"},
-    {"id": "control", "name": "Control Field", "type": "DIMENSION"}
-  ]
+  "components": {
+    "visualization": "index.js"
+  },
+  "options": {},
+  "fields": {
+    "dimensions": [
+      {"id": "group", "name": "Group of tasks"},
+      {"id": "task", "name": "Task"},
+      {"id": "control", "name": "Control Field"}
+    ],
+    "metrics": [
+      {"id": "progress", "name": "Progress"},
+      {"id": "start", "name": "Start Date"},
+      {"id": "end", "name": "End Date"}
+    ]
+  }
 }
