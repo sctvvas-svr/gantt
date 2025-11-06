@@ -1,46 +1,23 @@
-const dscc = window.dscc;
+google.charts.load("current", {packages:["timeline"]});
+google.charts.setOnLoadCallback(drawChart);
 
-function drawGantt(data, config) {
-  const container = document.createElement("div");
-  container.style.display = "flex";
-  container.style.flexDirection = "column";
-  container.style.gap = "8px";
-  container.style.fontFamily = "Arial, sans-serif";
+function drawChart() {
+  const container = document.getElementById("chart");
+  const chart = new google.visualization.Timeline(container);
+  const dataTable = new google.visualization.DataTable();
 
-  const color = config.barColor || "#4285F4";
-  const height = config.barHeight || 20;
-  const showLabels = config.showLabels !== false;
+  dataTable.addColumn({ type: 'string', id: 'Group' });
+  dataTable.addColumn({ type: 'string', id: 'Task' });
+  dataTable.addColumn({ type: 'date', id: 'Start' });
+  dataTable.addColumn({ type: 'date', id: 'End' });
 
-  data.tables.DEFAULT.forEach(row => {
-    const task = row.dimID[0];
-    const start = new Date(row.dimID[1]);
-    const end = new Date(row.dimID[2]);
-    const duration = (end - start) / (1000 * 60 * 60 * 24);
+  dataTable.addRows([
+    [ 'Triển khai kéo cáp', 'Khảo sát', new Date(2025,10,7), new Date(2025,10,9) ],
+    [ 'Triển khai kéo cáp', 'Kéo cáp', new Date(2025,10,9), new Date(2025,10,11) ]
+  ]);
 
-    const wrapper = document.createElement("div");
-    wrapper.style.display = "flex";
-    wrapper.style.alignItems = "center";
-    wrapper.style.gap = "8px";
-
-    const bar = document.createElement("div");
-    bar.style.backgroundColor = color;
-    bar.style.height = `${height}px`;
-    bar.style.width = `${duration * 15}px`;
-    bar.style.borderRadius = "4px";
-
-    if (showLabels) {
-      const label = document.createElement("span");
-      label.textContent = `${task} (${duration}d)`;
-      label.style.fontSize = "12px";
-      wrapper.appendChild(label);
-    }
-
-    wrapper.appendChild(bar);
-    container.appendChild(wrapper);
+  chart.draw(dataTable, {
+    timeline: { showRowLabels: true },
+    colors: ['#e7711c', '#4374e0']
   });
-
-  document.body.innerHTML = "";
-  document.body.appendChild(container);
 }
-
-dscc.subscribeToData(drawGantt, { transform: dscc.tableTransform });
